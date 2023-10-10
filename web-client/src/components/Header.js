@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Web3Button } from "@web3modal/react";
 import { useNetwork } from "wagmi";
 import "../styles/header.css";

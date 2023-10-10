@@ -8,9 +8,9 @@ import { BrowserRouter } from 'react-router-dom';
 import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
 import { Web3Modal } from '@web3modal/react'
 import { configureChains, createClient, WagmiConfig } from 'wagmi'
-import { polygon, bsc } from 'wagmi/chains'
+import { polygon, polygonMumbai } from 'wagmi/chains'
 
-const chains = [bsc, polygon ]
+const chains = [ polygon, polygonMumbai ]
 
 const projectId = 'e8c0411f89c933ea0d0a53571d544509'
 

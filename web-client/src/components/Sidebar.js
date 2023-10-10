@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 import {navlinks } from '../constants';
 import "../styles/sidebar.css";
 
@@ -21,7 +21,7 @@ const Icon = ({ styles, name, imgUrl, selectedImg, isActive, disabled, handleCli
 
 export default function Sideabar() {
     const navigate = useNavigate();
-    const [isActive, setIsActive] = useState('dashboard');
+    const [isActive, setIsActive] = useState('');
     return (
         <div className='sidebar'>
                 <div className="sidebar-nav">

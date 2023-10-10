@@ -6,6 +6,10 @@ import { useNetwork } from "wagmi";
 import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
 import Home from "./pages/Home";
+import BlueChip from "./pages/BlueChip";
+import Exchange from "./pages/Exchange";
+import Learn from "./pages/Learn";
+import Analytics from "./pages/Analytics";
 
 
 function App() {
@@ -22,6 +26,10 @@ function App() {
       <Sidebar />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/bluechip" element={<BlueChip />} />
+        <Route path="/exchange" element={<Exchange />} />
+        <Route path="/analytics" element={<Analytics />}/>
+        <Route path="/learn" element={<Learn />} />
         {/* <Route path="/explorer" element={<IdeaExplorer />} />
           <Route path="/create" element={<CreateScreen />} />
           <Route path="/collection" element={<CollectionScreen />} />
