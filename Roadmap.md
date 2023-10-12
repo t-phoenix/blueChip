@@ -11,12 +11,12 @@
 
 
 ## Build AMM/ plugin token to Uniswap Protocol
-- ***Provide Liquidity in BLUE/ETH pair***
-- ***Swap BLUE/ETH on DEX***
+- Provide Liquidity in BLUE/ETH pair (FP)
+- Swap BLUE/ETH on DEX (FP)
 
 
 ## Addition to Index Fund using Set Modules
-- Governance (FP)
+- ***Governance*** 
 - Trade Module (FP)
 - Investment of Funds Mechanism (FP)
 
@@ -24,9 +24,9 @@
 ## Interface/ Frontend
 - ***Simple Explaining Cards for Educating about Blue Chip***
 - ***BLUE MINT/REDEEM***
-- ***BLUE-UNISWAP DEX LP/SWAP***
-- Analytics DASHBOARD (potiential)
-- Admin Dashboard (FP)
+- BLUE-UNISWAP DEX LP/SWAP (FP)
+- ***Analytics DASHBOARD***
+- Admin Dashboard (Potntial)
 
 
 

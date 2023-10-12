@@ -1,3 +1,14 @@
+# Blue Chip Interface
+
+1. Home Screen
+2. Faucet for ERC20 tokens
+3. Mint/Redeem Blue Chip
+4. LP/ Swap with Uniswap v3
+5. Analytics Dashboard
+6. Educating on Blue Chip Index Fund
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
