@@ -17,9 +17,16 @@
 */
 
 pragma solidity 0.6.10;
-import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+
 contract ERCToken is ERC20 {
-    constructor(string memory _name, string memory _symbol, uint256 _initialSupply) ERC20(_name, _symbol) public {
-        _mint(msg.sender, _initialSupply);
+    constructor(string memory _name, string memory _symbol)
+        ERC20(_name, _symbol )
+        public
+    { }
+
+    function mint(address to, uint256 amount) public {
+        _mint(to, amount);
     }
 }
