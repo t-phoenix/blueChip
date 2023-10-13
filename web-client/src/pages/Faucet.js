@@ -1,7 +1,7 @@
 import React from "react"
 import "../styles/homestyle.css";
 
-export default function Exchange(){
+export default function Faucet(){
     return(
         <div className="main-content">
             <div className='sub-content'>

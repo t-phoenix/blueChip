@@ -1,4 +1,4 @@
-import {FaChartLine, FaCoins, FaExchangeAlt, FaLeanpub } from "react-icons/fa";
+import {FaChartLine, FaCoins, FaExchangeAlt, FaLeanpub, FaFaucet } from "react-icons/fa";
 import '../styles/sidebar.css';
 
 export const navlinks = [
@@ -9,10 +9,10 @@ export const navlinks = [
     link: '/bluechip',
   },
   {
-    name: 'Exchange',
-    imgUrl: <FaExchangeAlt className="icon-simple"/>,
-    selectedImg: <FaExchangeAlt className="icon-selected"/>,
-    link: '/exchange',
+    name: 'Faucet',
+    imgUrl: <FaFaucet className="icon-simple"/>,
+    selectedImg: <FaFaucet className="icon-selected"/>,
+    link: '/faucet',
   },
   {
     name: 'Analytics',

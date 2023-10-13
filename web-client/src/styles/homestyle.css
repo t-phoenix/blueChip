@@ -1,6 +1,5 @@
 .main-content {
   width: 100%;
-  height: 80vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -17,7 +16,7 @@
 
 .main-image{
   margin-top: 2%;
-  margin-bottom: 6%;
+  margin-bottom: 0;
   height: 40vh;
   object-fit: fill;
 }
@@ -27,8 +26,11 @@
 }
 
 .headline{
-  font-size: 3vh;
+  font-size: 6em;
   color: #5EBED4;
+  margin: 2%;
+  font-weight: 900;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 .main-animation-text{
@@ -37,9 +39,13 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  font-size: 2.4vh;
+  font-size: 4.2vh;
   width: 100%;
-  height: 60px;
+  margin-block: 50vh;
+  font-style: oblique;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-weight: 500;
+  
 }
 
 @media all and (max-width: 950px) {
@@ -54,6 +60,10 @@
   }
   .main-image{
     margin-top: 12%;
+  }
+
+  .main-animation-text{
+    flex-direction: column;
   }
 }
 

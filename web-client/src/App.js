@@ -7,9 +7,9 @@ import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
 import Home from "./pages/Home";
 import BlueChip from "./pages/BlueChip";
-import Exchange from "./pages/Exchange";
 import Learn from "./pages/Learn";
 import Analytics from "./pages/Analytics";
+import Faucet from "./pages/Faucet";
 
 
 function App() {
@@ -27,7 +27,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/bluechip" element={<BlueChip />} />
-        <Route path="/exchange" element={<Exchange />} />
+        <Route path="/faucet" element={<Faucet />} />
         <Route path="/analytics" element={<Analytics />}/>
         <Route path="/learn" element={<Learn />} />
         {/* <Route path="/explorer" element={<IdeaExplorer />} />
