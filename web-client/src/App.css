@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  min-height: 100vh;
+  min-height: 95vh;
   width: 100vw;
   display: flex;
   flex-direction: column;
@@ -13,7 +13,7 @@
 
 
 .body {
-  width: 95%;
+  width: 100%;
   display: flex;
   flex-direction: row;
   margin-top: 13vh;
@@ -21,6 +21,10 @@
 }
 
 @media all and (max-width: 950px){
+  /* .App {
+    width: 100vw;
+  } */
+
   .body {
     display: flex;
     flex-direction: column;
@@ -63,22 +67,26 @@ button {
   margin-block: 10px;
   padding-block: 0px;
   padding-inline: 20px;
-  background-color: #52BAD1;
-  box-shadow: 2px 2px #a23615;
+  background-color: #C0DA74;
+  box-shadow: 2px 1px #FBF9FF;
+  display: flex;
+  flex-direction: row;
+  justify-content:space-around;
+  align-items: center;
 }
 
 button:hover {
-  background-color: #52BAD1;
-  box-shadow: 1px 1px #f1fffa;
+  background-color: #C0DA74;
+  box-shadow: 1px 1px #52BAD1;
 }
 
 input {
   width: 250px;
-  border-radius: 20px;
   padding-block: 5px;
   padding-inline: 10px;
-  font-size: 16px;
-  background-color: #eef9ef;
+  font-size: 32px;
+  background-color: #040f0f;
+  border-width: 0;
 }
 
 
