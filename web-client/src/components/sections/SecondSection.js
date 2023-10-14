@@ -27,7 +27,7 @@ export default function SecondSection(){
         transition={{ ease: 'easeInOut', duration: HERO_HEADING_DURATION }}
         className="main-animation-text"
         >
-        <h2 className='font-light' style={{color: '#52BAD1'}}>{`Crypto Basket For\u00A0`}</h2>
+        <h2 className='font-light' style={{color: '#C0DA74'}}>{`Crypto Basket For\u00A0`}</h2>
         <h2 className='font-bold' style={{ color: typingAnimationTextColor }}>
           <TypeAnimation
             sequence={[

@@ -10,6 +10,7 @@ import BlueChip from "./pages/BlueChip";
 import Learn from "./pages/Learn";
 import Analytics from "./pages/Analytics";
 import Faucet from "./pages/Faucet";
+import Approve from "./pages/Approve";
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
         <Route path="/faucet" element={<Faucet />} />
         <Route path="/analytics" element={<Analytics />}/>
         <Route path="/learn" element={<Learn />} />
+        <Route path="/approve" element={<Approve/>}/>
         {/* <Route path="/explorer" element={<IdeaExplorer />} />
           <Route path="/create" element={<CreateScreen />} />
           <Route path="/collection" element={<CollectionScreen />} />
