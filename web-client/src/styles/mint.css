@@ -54,15 +54,17 @@
 }
 
 .option-button{
-    margin: 4px;
-    padding: 8px;
-    border-style: dotted;
+    margin-inline: -4px;
+    padding-inline: 16px;
+    padding-block: 8px;
+    border-style:inset;
     border-radius: 10px;
 }
 
 .selected-button{
-    margin: 4px;
-    padding: 8px;
+    margin-inline: -4px;
+    padding-inline: 16px;
+    padding-block: 8px;
     border-style: solid;
     border-radius: 10px;
     border-width: 2px;
