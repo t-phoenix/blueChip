@@ -1,124 +1,74 @@
-import React, { useState, useEffect, useRef } from "react";
-import Dashboard from "../components/Dashboard";
-import { formatData } from "../constants/utils";
+import React from "react";
+import PriceGraph from "../components/PriceGraph";
 import "../styles/analytics.css";
+import Overview from "../components/Overview";
+import Portfolio from "../components/Portfolio";
 
 export default function Analytics() {
-  const [currencies, setcurrencies] = useState([]);
-  const [pair, setpair] = useState("ETH/USD");
-  const [price, setprice] = useState("0.00");
-  const [pastData, setpastData] = useState({});
-  const ws = useRef(null);
+    const [subTab, setSubTab] = React.useState("overview");
 
-  let first = useRef(false);
-  const url = "https://api.pro.coinbase.com";
-
-  useEffect(() => {
-    ws.current = new WebSocket("wss://ws-feed.pro.coinbase.com");
-    let pairs = [];
-
-    const apiCall = async () => {
-      await fetch(url + "/products")
-        .then((res) => res.json())
-        .then((data) => (pairs = data));
-
-      console.log("Fetched Pairs: ", pairs);
-      let filtered = pairs.filter((pair) => {
-        console.log("Pairs Data:", pair)
-        if (pair.display_name === "ETH/USD" || pair.display_name === "BTC/USD") {
-          return pair;
-        }
-      });
-
-      filtered = filtered.sort((a, b) => {
-        if (a.base_currency < b.base_currency) {
-          return -1;
-        }
-        if (a.base_currency > b.base_currency) {
-          return 1;
-        }
-        return 0;
-      });
-
-      setcurrencies(filtered);
-
-      first.current = true;
-    };
-
-    apiCall();
-  }, []);
-
-  useEffect(() => {
-    if (!first.current) {
-      return;
+    function setOverviewTab() {
+      setSubTab("overview");
+    }
+  
+    function setGraphTab() {
+      setSubTab("graph");
     }
 
-    let msg = {
-      type: "subscribe",
-      product_ids: [pair],
-      channels: ["ticker"],
-    };
-    let jsonMsg = JSON.stringify(msg);
-    ws.current.send(jsonMsg);
-
-    let historicalDataURL = `${url}/products/${pair}/candles?granularity=86400`;
-    const fetchHistoricalData = async () => {
-      let dataArr = [];
-      await fetch(historicalDataURL)
-        .then((res) => res.json())
-        .then((data) => (dataArr = data));
-
-      console.log({ dataArr });
-      if (dataArr != []) {
-        let formattedData = formatData(dataArr);
-        console.log("DATA:", { formattedData });
-        setpastData(formattedData);
-      }
-    };
-
-    fetchHistoricalData();
-
-    ws.current.onmessage = (e) => {
-      let data = JSON.parse(e.data);
-      if (data.type !== "ticker") {
-        return;
-      }
-
-      if (data.product_id === pair) {
-        setprice(data.price);
-      }
-    };
-  }, [pair]);
-
-  const handleSelect = (e) => {
-    let unsubMsg = {
-      type: "unsubscribe",
-      product_ids: [pair],
-      channels: ["ticker"],
-    };
-    let unsub = JSON.stringify(unsubMsg);
-
-    ws.current.send(unsub);
-
-    setpair(e.target.value);
-  };
-
-  console.log({ currencies });
+    function setPortfolioTab(){
+        setSubTab("portfolio");
+    }
 
   return (
     <div className="main-content">
-      {
-        <select name="currency" value={pair} onChange={handleSelect}>
-          {currencies.map((cur, idx) => {
-            return (
-              <option key={idx} value={cur.id}>
-                {cur.display_name}
-              </option>
-            );
-          })}
-        </select>
-      }
-      <Dashboard price={price} data={pastData} />
+        <h1 style={{marginTop: '0px'}}>Analytics Dashboard</h1>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "flex-start",
+          alignItems: "center",
+          marginBottom: '12px'
+        }}
+      >
+        {subTab === "overview" ? (
+          <div className="selected-button" onClick={setOverviewTab}>
+            Overview
+          </div>
+        ) : (
+          <div className="option-button" onClick={setOverviewTab}>
+            Overview
+          </div>
+        )}
+        {subTab === "graph" ? (
+          <div className="selected-button" onClick={setGraphTab}>
+            Graph
+          </div>
+        ) : (
+          <div className="option-button" onClick={setGraphTab}>
+            Graph
+          </div>
+        )}
+        {subTab === "portfolio" ? (
+          <div className="selected-button" onClick={setPortfolioTab}>
+            Potfolio
+          </div>
+        ) : (
+          <div className="option-button" onClick={setPortfolioTab}>
+            Portfolio
+          </div>
+        )}
+      </div>
+      {subTab === "overview"? <Overview/>: <></>}
+      {subTab === "graph" ? <PriceGraph />: <></>}
+      {subTab === "portfolio" ? <Portfolio />: <></>}
+      
     </div>
   );
 }
+
+
+ 
+
+
+

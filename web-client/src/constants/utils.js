@@ -5,12 +5,13 @@ export const formatData = (data) => {
         {
           label: "Price",
           data: [],
-          backgroundColor: "rgb(255, 99, 132, 0.8)",
-          borderColor: "rgba(255, 99, 132, 0.2)",
+          backgroundColor: "#C0DA74",
+          borderColor: "#C0DA74",
           fill: false
         }
       ]
     };
+    
   
     let dates = data.map((val) => {
       const ts = val[0];

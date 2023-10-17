@@ -54,22 +54,22 @@
 }
 
 .option-button{
-    margin-inline: -4px;
+    margin-inline: 0px;
     padding-inline: 16px;
     padding-block: 8px;
     border-style:inset;
-    border-radius: 10px;
+    border-radius: 0px;
 }
 
 .selected-button{
-    margin-inline: -4px;
+    margin-inline: 0px;
     padding-inline: 16px;
     padding-block: 8px;
     border-style: solid;
-    border-radius: 10px;
+    border-radius: 0px;
     border-width: 2px;
     border-color: aliceblue;
-    background-color: #52BAD1;
+    background-color: #C0DA74;
     color: #2d2d2d;
 
 }
