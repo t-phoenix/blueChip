@@ -1,14 +1,16 @@
 import React from "react"
-import "../styles/homestyle.css";
+import "../styles/learn.css";
+import IndexFund from "../components/learn/IndexFund";
+import AboutBlue from "../components/learn/AboutBlue";
+import Steps from "../components/learn/Steps";
 
 export default function Learn(){
     return(
         <div className="main-content">
-            <div className='sub-content'>
-                <h1 className='home-heading'>Hello Learners !!</h1>
-                <h2 className='home-subheading'>Explain in simple steps</h2>
-                
-
+            <div className='learn-container'>
+                <IndexFund />
+                <AboutBlue />
+                <Steps />
             </div>
         </div>
     )
