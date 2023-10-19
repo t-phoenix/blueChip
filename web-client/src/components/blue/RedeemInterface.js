@@ -2,34 +2,87 @@ import React from "react";
 import blueLogo from "../../assets/blueLogo.svg";
 import "../../styles/mint.css";
 import TokenRedeem from "./TokenRedeem";
+import { contractAddress, toETHdenomination, toWeidenomination } from "../../constants/addresses";
+import { useAccount } from "wagmi";
+import toast, {Toaster} from "react-hot-toast";
+import {readContract, prepareWriteContract,writeContract} from "@wagmi/core";
+import Loader from "../Loader";
+import { BasicIssueABI, SetTokenABI } from "../../constants/contractABIs";
+
+
+const success = (msg) => toast.success(`${msg} BLUE redeemed succesfully`);
+const error = (err) => toast.error("Error while adding transaction: ", {err})
+
 
 export default function RedeemInterface() {
+  const account = useAccount();
   const [blueValue, setBlueValue] = React.useState(0);
   const usdValue = 0;
-  const balance = 2.5;
+  const [balance, setBalance] = React.useState(0);
 
   const [tokenBalances, setTokenBalances] = React.useState([
     {
       key: 0,
+      contractAddress: contractAddress.wETH,
       tokenName: "wETH",
       iconSymbol: "eth",
-      balance: "1.23",
+      requiredAsset: "3",
       value: "1918.9",
-      approve: "0.89",
+
     },
     {
       key: 1,
+      contractAddress: contractAddress.wBTC,
       tokenName: "wBTC",
       iconSymbol: "btc",
-      balance: "0.56",
+      requiredAsset: "1",
       value: "14000",
-      approve: "0.23",
+
     },
   ]);
+
+  React.useEffect(()=>{
+    fetchBlueBalance()
+  },[])
+
+  async function fetchBlueBalance(){
+    const blueBalance = await readContract({
+      address: contractAddress.blue,
+      abi: SetTokenABI,
+      functionName: 'balanceOf',
+      args: [account.address]
+    })
+    console.log("BLUE Supply: ", Number(blueBalance), " wETH");
+    setBalance(toETHdenomination(Number(blueBalance)))
+  }
+
+  function adjustRequiredAssets(e){
+    setBlueValue(e.target.value);
+    setTokenBalances([{...tokenBalances[0], requiredAsset: 3 * Number(e.target.value)}, {...tokenBalances[1], requiredAsset: Number(e.target.value)}])
+  }
+
+  async function redeemBLUE(){
+    const config = await prepareWriteContract({
+      address: contractAddress.bim,
+      abi: BasicIssueABI,
+      functionName: "redeem",
+      args: [contractAddress.blue, toWeidenomination(blueValue), account.address],
+    });
+
+    try {
+      const { hash } = await writeContract(config);
+      console.log("Redeem BLUE Hash:", hash);
+      success(`${blueValue}`)
+    } catch (error) {
+      console.log(error);
+      error(error);
+    }
+  }
 
   return (
     <>
       <div className="input-box">
+        <Toaster/>
         <div
           style={{
             width: "100%",
@@ -41,7 +94,7 @@ export default function RedeemInterface() {
         >
           <input
             value={blueValue}
-            onChange={(e) => setBlueValue(e.target.value)}
+            onChange={adjustRequiredAssets}
             type="number"
             placeholder={blueValue}
             style={{ margin: "5px", backgroundColor: "transparent", color: '#C0DA74', width: "50%" }}
@@ -81,7 +134,7 @@ export default function RedeemInterface() {
         ))}
       </div>
 
-      <button>
+      <button onClick={redeemBLUE}>
           Redeem BLUE <img src={blueLogo} style={{ height: "30px" }} />
         </button>
     </>

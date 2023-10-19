@@ -22,22 +22,28 @@ async function main() {
     "wBTC",
   ]);
 
-  // Mint 100 wETH and 50 wBTC for 4 accounts
-  for (let index = 0; index < 4; index++) {
+  // Mint 100 wETH and 50 wBTC for 3 accounts
+  for (let index = 0; index < 3; index++) {
     await wETH
       .connect(accounts[index])
-      .mint(accounts[index], 100000000000000000000n);
+      .mint(accounts[index], 20000000000000000000n);
+      // 20 wETH
     await wBTC
       .connect(accounts[index])
-      .mint(accounts[index], 50000000000000000000n);
+      .mint(accounts[index], 5000000000000000000n);
+      // 5 wBTC
   }
 
   const ETHSupply = await wETH.totalSupply();
   const BTCSupply = await wBTC.totalSupply();
 
   console.log(
+    "ETH Contract: ", 
+    String(wETH.target),
     "ETH Supply: ",
     String(ETHSupply) / 10 ** 18,
+    "BTC Contract: ", 
+    String(wBTC.target),
     " BTC Supply: ",
     String(BTCSupply) / 10 ** 18
   );
@@ -58,7 +64,7 @@ async function main() {
   // Deploy Set Token (Blue Chip - wETH, wBTC)
   const blueChip = await ethers.deployContract("SetToken", [
     [wETH.target, wBTC.target],
-    [15000000000000000000n, 1000000000000000000n],
+    [3000000000000000000n, 1000000000000000000n],
     [basicIssueModule.target],
     controller.target,
     owner,
@@ -76,16 +82,17 @@ async function main() {
     .initialize(blueChip.target, "0x0000000000000000000000000000000000000000");
 
   // Delegate wETH/wBTC allowance to BIM
-  for (let index = 0; index < 4; index++) {
+  for (let index = 0; index < 3; index++) {
     await wETH
       .connect(accounts[index])
-      .approve(basicIssueModule.target, 100000000000000000000n);
+      .approve(basicIssueModule.target, 20000000000000000000n);
     await wBTC
       .connect(accounts[index])
-      .approve(basicIssueModule.target, 50000000000000000000n);
+      .approve(basicIssueModule.target, 5000000000000000000n);
   }
 
   // Testing Components and Units in Set Token
+  //Testing for 1 BLUE TOKEN
   const result = await basicIssueModule.getRequiredComponentUnitsForIssue(
     blueChip.target,
     1000000000000000000n
@@ -127,7 +134,7 @@ async function main() {
   await basicIssueModule
     .connect(accounts[1])
     .issue(blueChip.target, 2423000000000000000n, accounts[1].address);
-  // Miint 2.987 Blue Tokens
+  // Miint 3.987 Blue Tokens
   await basicIssueModule
     .connect(accounts[2])
     .issue(blueChip.target, 3987000000000000000n, accounts[2].address);
@@ -137,7 +144,7 @@ async function main() {
   console.log("New Updated Token Supply:", String(newTokenSupply) / 10 ** 18);
 
   // Print Account Balances
-  for (index = 0 ; index < 4 ; index++ ) {
+  for (index = 0 ; index < 3 ; index++ ) {
     const balance = await hre.ethers.provider.getBalance(accounts[index]);
     const balancewETH = await wETH.balanceOf(accounts[index]);
     const balancewBTC = await wBTC.balanceOf(accounts[index]);
@@ -172,7 +179,7 @@ async function main() {
 
 
      // Print Account Balances
-  for (index = 0 ; index < 4 ; index++ ) {
+  for (index = 0 ; index < 3 ; index++ ) {
     const balance = await hre.ethers.provider.getBalance(accounts[index]);
     const balancewETH = await wETH.balanceOf(accounts[index]);
     const balancewBTC = await wBTC.balanceOf(accounts[index]);

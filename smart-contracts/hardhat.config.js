@@ -13,7 +13,7 @@ module.exports = {
       }
     }
   },
-  defaultNetwork: 'hardhat',
+  defaultNetwork: 'mumbai',
   networks: {
     hardhat: {
       forking: {
