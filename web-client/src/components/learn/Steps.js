@@ -1,7 +1,6 @@
 import React from "react"
 import "../../styles/learn.css";
 
-
 export default function Steps(){
     return(
         <div className="content-container">
@@ -14,3 +13,5 @@ export default function Steps(){
         </div>
     )
 }
+
+

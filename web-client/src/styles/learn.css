@@ -28,8 +28,9 @@
     display: flex;
     flex-direction: column;
     align-items: start;
-    margin: 2%;
+    margin: 6%;
     align-content: start;
+
 
 }
 
@@ -37,4 +38,19 @@
     display: flex;
     flex-direction: column;
     text-align: start;
+    width: 60%;
+    text-decoration-style: dashed;    
+    letter-spacing: 2px;
+    font-size: 20px;
+    line-height: 1.5;
+}
+
+
+.free-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 12%;
+    margin-top: 4%;
 }
