@@ -7,14 +7,18 @@ import { readContract } from "@wagmi/core";
 import Loader from "../Loader";
 
 export default function TokenBalance({ props }) {
+  // console.log("Token Balance Props:", props);
   const account = useAccount();
-  console.log("Print Input to token Balance:", props);
+  
+  
   const [isLoading, setIsLoading] = React.useState(false);
 
   React.useEffect(() => {
     fetchUserBalance();
+    
   }, []);
 
+  
   async function fetchUserBalance() {
     setIsLoading(true);
     const balance = await readContract({
@@ -23,8 +27,8 @@ export default function TokenBalance({ props }) {
       functionName: "balanceOf",
       args: [account.address],
     });
-    console.log("Balance: ", Number(balance), props.tokenName);
-    props.balance = toETHdenomination(Number(balance));
+    // console.log("Balance: ", Number(balance), props.tokenName);
+    props.balance = Number(toETHdenomination(Number(balance))).toFixed(2);
 
     const approval = await readContract({
       address: props.contractAddress,
@@ -32,8 +36,8 @@ export default function TokenBalance({ props }) {
       functionName: 'allowance',
       args: [account.address, contractAddress.bim]
     })
-    console.log("Approval Balance: ", Number(approval));
-    props.approve = toETHdenomination(Number(approval));
+    // console.log("Approval Balance: ", Number(approval));
+    props.approve = Number(toETHdenomination(Number(approval))).toFixed(2);
     
 
     setIsLoading(false);
@@ -46,6 +50,7 @@ export default function TokenBalance({ props }) {
           <h2 className="aligned-para">
             {props.tokenName} <Icon name={props.iconSymbol} size={20} />
           </h2>
+
           <div style={{ marginLeft: "20%" }}>
             <h2 style={{ marginBlock: "4px", color: "#C0DA74" }}>
               {props.requiredAsset}

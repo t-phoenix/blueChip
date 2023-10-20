@@ -14,11 +14,14 @@ const success = (msg) => toast.success(`${msg} BLUE redeemed succesfully`);
 const error = (err) => toast.error("Error while adding transaction: ", {err})
 
 
-export default function RedeemInterface() {
+export default function RedeemInterface({price}) {
   const account = useAccount();
-  const [blueValue, setBlueValue] = React.useState(0);
+  const [blueValue, setBlueValue] = React.useState(1);
   const usdValue = 0;
   const [balance, setBalance] = React.useState(0);
+
+  const fixedBluePrice = 3 * price.eth + price.btc;
+  const [bluePrice, setBluePrice]= React.useState(fixedBluePrice);
 
   const [tokenBalances, setTokenBalances] = React.useState([
     {
@@ -27,7 +30,7 @@ export default function RedeemInterface() {
       tokenName: "wETH",
       iconSymbol: "eth",
       requiredAsset: "3",
-      value: "1918.9",
+      value: 3 * price.eth,
 
     },
     {
@@ -36,7 +39,7 @@ export default function RedeemInterface() {
       tokenName: "wBTC",
       iconSymbol: "btc",
       requiredAsset: "1",
-      value: "14000",
+      value: price.btc,
 
     },
   ]);
@@ -52,13 +55,14 @@ export default function RedeemInterface() {
       functionName: 'balanceOf',
       args: [account.address]
     })
-    console.log("BLUE Supply: ", Number(blueBalance), " wETH");
-    setBalance(toETHdenomination(Number(blueBalance)))
+    // console.log("BLUE Supply: ", Number(blueBalance), " wETH");
+    setBalance(Number(toETHdenomination(Number(blueBalance))).toFixed(2))
   }
 
   function adjustRequiredAssets(e){
     setBlueValue(e.target.value);
-    setTokenBalances([{...tokenBalances[0], requiredAsset: 3 * Number(e.target.value)}, {...tokenBalances[1], requiredAsset: Number(e.target.value)}])
+    setTokenBalances([{...tokenBalances[0], requiredAsset: Number(3 * Number(e.target.value)).toFixed(2), value: Number(3 * Number(e.target.value) * price.eth).toFixed(2)}, {...tokenBalances[1], requiredAsset: Number(e.target.value).toFixed(2), value: Number(Number(e.target.value)* price.eth).toFixed(2)}])
+    setBluePrice(Number(e.target.value * fixedBluePrice).toFixed(2))
   }
 
   async function redeemBLUE(){
@@ -121,7 +125,7 @@ export default function RedeemInterface() {
             marginLeft: "1vw",
           }}
         >
-          <p>${usdValue}</p>
+          <p>$ {bluePrice}</p>
           <p>Balance: {balance}</p>
         </div>
       </div>

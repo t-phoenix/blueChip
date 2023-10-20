@@ -8,6 +8,13 @@ export default function Home(){
         <div className="main-content">
             <HeroSection />
             <SecondSection />
+            <p style={{color: '#52BAD1', marginBlock: '30vh'}}>Made with ❤️ by  <a
+                href={`https://twitter.com/touchey_phoenix`}
+                target="blank"
+                style={{ fontSize: "14px" }}
+              >@toucheyphoenix</a></p>
         </div>
     )
 }
+/* C0DA74
+  52BAD1 */

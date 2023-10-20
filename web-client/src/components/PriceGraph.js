@@ -28,6 +28,7 @@ export default function PriceGraph() {
           pair.display_name === "ETH/USD" ||
           pair.display_name === "BTC/USD"
         ) {
+          
           return pair;
         }
       });
@@ -74,7 +75,7 @@ export default function PriceGraph() {
       console.log("RETURNED!", first.current);
       return;
     }
-
+    console.log("Pair New: ", pair);
     let msg = {
       type: "subscribe",
       product_ids: [pair],

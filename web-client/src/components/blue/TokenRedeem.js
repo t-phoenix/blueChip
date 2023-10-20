@@ -8,35 +8,8 @@ import Loader from "../Loader";
 
 export default function TokenRedeem({ props }) {
   const account = useAccount();
-  console.log("Print Input to token Balance:", props);
   const [isLoading, setIsLoading] = React.useState(false);
 
-  // React.useEffect(() => {
-  //   fetchUserBalance();
-  // }, []);
-
-  // async function fetchUserBalance() {
-  //   setIsLoading(true);
-  //   const balance = await readContract({
-  //     address: props.contractAddress,
-  //     abi: ERCTokenABI,
-  //     functionName: "balanceOf",
-  //     args: [account.address],
-  //   });
-  //   console.log("Balance: ", Number(balance), props.tokenName);
-  //   props.balance = toETHdenomination(Number(balance));
-
-  //   const approval = await readContract({
-  //     address: props.contractAddress,
-  //     abi: ERCTokenABI,
-  //     functionName: "allowance",
-  //     args: [account.address, contractAddress.bim],
-  //   });
-  //   console.log("Approval Balance: ", Number(approval));
-  //   props.approve = toETHdenomination(Number(approval));
-
-  //   setIsLoading(false);
-  // }
 
   return (
     <div key={props.key}>
@@ -58,6 +31,7 @@ export default function TokenRedeem({ props }) {
                 fontSize: "10px",
                 marginLeft: "5px",
                 marginBlock: "0",
+                width: "80px",
               }}
             >
               $ {props.value}

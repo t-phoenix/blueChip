@@ -1,46 +1,67 @@
 import React from "react";
 import "../styles/analytics.css";
-import { contractAddress, getLinkedAddress } from "../constants/addresses";
+import {
+  contractAddress,
+  getLinkedAddress,
+  toETHdenomination,
+} from "../constants/addresses";
 import { SetTokenABI } from "../constants/contractABIs";
-import { readContract } from '@wagmi/core'
-
+import { readContract } from "@wagmi/core";
+import { fetchBTCPrice, fetchETHPrice } from "../services/Coinbase";
+import Loader from "./Loader";
 
 export default function Overview() {
-  const blue = contractAddress.blue
+  const [isLoading, setIsLoading] = React.useState(false);
+ 
+
+  const blue = contractAddress.blue;
   const issueModule = contractAddress.bim;
-  const controller = contractAddress.controller
+  const controller = contractAddress.controller;
 
-  const [supply, setSupply] = React.useState(45);
-  const [AUM, setAUM] = React.useState(34500.43);
-  const [value, setValue] = React.useState(766.873);
+  const [supply, setSupply] = React.useState(0);
+  const [AUM, setAUM] = React.useState(0);
+  const [value, setValue] = React.useState(0);
 
-  const [manager, setManager] = React.useState('0xD56C7212A5551AD68c9b15aEBaf5AC2A66E6A27c')
+  const [manager, setManager] = React.useState(
+    "0xD56C7212A5551AD68c9b15aEBaf5AC2A66E6A27c"
+  );
 
-  React.useEffect(()=>{
+  React.useEffect(() => {
     fetchBLUEDetails();
-  },[])
+    
+  }, []);
 
+  async function fetchPrice(supply) {
+    let ethprice = await fetchETHPrice();
+    let btcprice = await fetchBTCPrice();
+    
+    let blueprice = 3 * Number(ethprice) + Number(btcprice);
+    setValue(Number(blueprice).toFixed(2));
+    let aum = (Number(supply)/10**18) * blueprice;
+    setAUM(aum.toFixed(2));
+      
+  }
 
-  async function fetchBLUEDetails(){
+  async function fetchBLUEDetails() {
+    setIsLoading(true)
     const supply = await readContract({
       address: contractAddress.blue,
       abi: SetTokenABI,
-      functionName: 'totalSupply',
-    })
+      functionName: "totalSupply",
+    });
     console.log("Blue Supply: ", Number(supply), " BLUE");
-    setSupply(Number(supply))
+    setSupply(toETHdenomination(Number(supply)));
 
     const handler = await readContract({
       address: contractAddress.blue,
       abi: SetTokenABI,
-      functionName: 'manager',
-    })
-    console.log("Blue Manager: ", String(handler), " BLUE");
-    setManager(String(handler))
+      functionName: "manager",
+    });
+    console.log("Blue Manger: ", String(handler), " BLUE");
+    setManager(String(handler));
+    fetchPrice(supply);
+    setIsLoading(false);
   }
-
-
-
 
   return (
     <div className="card-container">
@@ -62,7 +83,7 @@ export default function Overview() {
             </div>
             <div className="baseline-container">
               <h3 className="label-style">Token Supply: &nbsp; </h3>
-              <p className="value-style"> {supply} BLUE </p>
+              {isLoading? <Loader/> : <p className="value-style"> {supply} BLUE </p>}
             </div>
           </div>
           <div>
@@ -73,34 +94,66 @@ export default function Overview() {
               <h3 className="label-style">
                 Asset Under Management(AUM): &nbsp;
               </h3>
-              <p className="value-style">$ {AUM}</p>
+              {isLoading? <Loader/> : <p className="value-style">$ {AUM}</p>}
             </div>
             <div className="baseline-container">
               <h3 className="label-style">Token Value (BLUE): &nbsp;</h3>
-              <p className="value-style">$ {value}</p>
+              {isLoading? <Loader/> : <p className="value-style">$ {value}</p>}
             </div>
           </div>
         </div>
-        <div style={{marginLeft: '10%', marginTop: '5%'}}>
-            <div className="baseline-container">
-              <h3 className="label-style">Manager: &nbsp;</h3>
-              <p className="value-style"><a href={getLinkedAddress(manager)} target="blank" style={{ fontSize: '14px' }}>{manager}</a></p>
-            </div>
+        <div style={{ marginLeft: "10%", marginTop: "5%" }}>
+          <div className="baseline-container">
+            <h3 className="label-style">Manager: &nbsp;</h3>
+            <p className="value-style">
+              <a
+                href={getLinkedAddress(manager)}
+                target="blank"
+                style={{ fontSize: "14px" }}
+              >
+                {manager}
+              </a>
+            </p>
+          </div>
 
-            <div className="baseline-container">
-              <h3 className="label-style">BLUE Token: &nbsp;</h3>
-              <p className="value-style"><a href={getLinkedAddress(blue)} target="blank" style={{ fontSize: '14px' }}>{blue}</a></p>
-            </div>
+          <div className="baseline-container">
+            <h3 className="label-style">BLUE Token: &nbsp;</h3>
+            <p className="value-style">
+              <a
+                href={getLinkedAddress(blue)}
+                target="blank"
+                style={{ fontSize: "14px" }}
+              >
+                {blue}
+              </a>
+            </p>
+          </div>
 
-            <div className="baseline-container">
-              <h3 className="label-style">Basic Issue Module: &nbsp;</h3>
-              <p className="value-style"><a href={getLinkedAddress(issueModule)} target="blank" style={{ fontSize: '14px' }}>{issueModule}</a></p>
-            </div>
+          <div className="baseline-container">
+            <h3 className="label-style">Basic Issue Module: &nbsp;</h3>
+            <p className="value-style">
+              <a
+                href={getLinkedAddress(issueModule)}
+                target="blank"
+                style={{ fontSize: "14px" }}
+              >
+                {issueModule}
+              </a>
+            </p>
+          </div>
 
-            <div className="baseline-container">
-              <h3 className="label-style">Controller: &nbsp;</h3>
-              <p className="value-style"><a href={getLinkedAddress(controller)} target="blank" style={{ fontSize: '14px' }}>{controller}</a></p>
-            </div>
+          <div className="baseline-container">
+            <h3 className="label-style">Controller: &nbsp;</h3>
+            <p className="value-style">
+              <a
+                href={getLinkedAddress(controller)}
+                target="blank"
+                style={{ fontSize: "14px" }}
+              >
+                {controller}
+              </a>
+            </p>
+          </div>
         </div>
       </div>
     </div>

@@ -15,7 +15,11 @@ import Approve from "./pages/Approve";
 
 function App() {
   const { chain } = useNetwork();
+  const ws = React.useRef(null);
+  ws.current = new WebSocket("wss://ws-feed.pro.coinbase.com");
+ 
   console.log("chain:", chain);
+  
 
   return (
     <div className="App">

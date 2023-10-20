@@ -32,8 +32,8 @@ export default function ApproveToken({ props }) {
       functionName: "balanceOf",
       args: [account.address],
     });
-    console.log("Balance: ", Number(balance), props.tokenName);
-    props.balance = toETHdenomination(Number(balance));
+    // console.log("Balance: ", Number(balance), props.tokenName);
+    props.balance = Number(toETHdenomination(Number(balance))).toFixed(2);
 
     
     const approval = await readContract({
@@ -42,8 +42,8 @@ export default function ApproveToken({ props }) {
       functionName: 'allowance',
       args: [account.address, contractAddress.bim]
     })
-    console.log("Approval Balance: ", Number(approval));
-    props.approve = toETHdenomination(Number(approval));
+    // console.log("Approval Balance: ", Number(approval));
+    props.approve = Number(toETHdenomination(Number(approval))).toFixed(2);
 
     setIsLoading(false);
   }
