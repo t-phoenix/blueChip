@@ -19,6 +19,7 @@ import {
   HERO_HEADING_INITIAL_OPACITY,
   HERO_HEADING_INITIAL_SCALE,
 } from "../../constants/animation";
+import { Navigate } from 'react-router-dom';
 
 const Line = ({ controls }) => {
   const variants = {
@@ -155,17 +156,20 @@ function Steps() {
           </motion.div>
 
           <motion.div ref={ref} className='steps-list-container'>
-            <li>Get Metamask Wallet</li>
-            <li>Fund the wallet with matic-testnet (mumbai) faucet.</li>
-            <li>Get test wETH, wBTC ERC20 token from faucet</li>
-            <li>Delegate those assets to BLUE protocol</li>
+            <li>Get <a
+                href={'https://www.youtube.com/watch?v=-HTubEJ61zU'}
+                target="blank"
+              >Metamask Wallet </a></li>
+            <li>Fund the wallet with matic-testnet (mumbai) <a href={'https://mumbaifaucet.com/'} target="blank" >faucet</a>.</li>
+            <li>Get test wETH, wBTC ERC20 token from <a href='/faucet'>faucet</a>.</li>
+            <li><a href='/bluechip'>Delegate</a> those assets to BLUE protocol</li>
             <li>
-              Mint BLUE - Respective component assets will be automatically
+            <a href='/bluechip'>Mint BLUE</a> - Respective component assets will be automatically
               transfered from minter to BLUE protocol.
             </li>
             <li>HODL/ Trade/ Lend BLUE and monitor your investments.</li>
             <li>
-              Redeem BLUE - Liquidate your assets and receive proportionate
+            <a href='/bluechip'>Redeem BLUE</a> - Liquidate your assets and receive proportionate
               funds.
             </li>
           </motion.div>
