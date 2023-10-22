@@ -7,8 +7,7 @@
     padding: 3%;
     margin-left: 18%;
   }
-
-
+  
   .learn-container {
     width: 90%;
     display: flex;
@@ -21,36 +20,107 @@
     margin-inline: 2vw;
     padding-inline: 2vw;
     padding-bottom: 4vh;
-}
+  }
 
-
-.content-container{
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    margin: 6%;
-    align-content: start;
-
-
-}
-
-.left-para{
+  .header-alignment{
+    text-align: start;
+    margin-left: 0;
+    margin-top: 10vh;
+    color: #52BAD1;
+  }
+  
+  .left-para {
     display: flex;
     flex-direction: column;
     text-align: start;
-    width: 60%;
-    text-decoration-style: dashed;    
+    width: 40vw;
+    text-decoration-style: dashed;
     letter-spacing: 2px;
     font-size: 20px;
     line-height: 1.5;
-}
-
-
-.free-container{
+    color: #C0DA74;
+  }
+  
+  .free-container {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
     margin-bottom: 12%;
     margin-top: 4%;
-}
+  }
+  
+
+  .content-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    place-self: start;
+    margin-inline: 16%;
+  }
+
+  .steps-section {
+    display: flex;
+    flex-direction: column;
+    column-gap: 0.75rem;
+    row-gap: 4rem;
+    justify-content: center;
+    align-content: center;
+    min-height: 100vh;
+    color: #C0DA74;
+  }
+  
+  .steps-list-container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    font-size: 1rem;
+    line-height: 2rem;
+    font-weight: 500;
+    list-style-type: none;
+    text-align: left;
+  }
+  
+  .steps-list-container > li {
+    margin-bottom: 0rem;
+    height: 7.2rem;
+  }
+  
+  .steps-content-container {
+    
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    color: #C0DA74;
+  }
+  
+  /* C0DA74
+  52BAD1 */
+  .step-numbers {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .line-container {
+    width: 0.25rem;
+    height: 5rem;
+    background-color: #C0DA74;
+  }
+  
+  .line {
+    height: 0.25rem;
+  }
+  
+  .circle-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 9999px;
+    border-width: 2px;
+    border-style: solid;
+    width: 2rem;
+    height: 2rem;
+    border-color: #C0DA74;
+  }

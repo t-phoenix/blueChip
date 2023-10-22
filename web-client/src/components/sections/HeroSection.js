@@ -3,12 +3,13 @@ import { motion, transform } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
 import blueLogo from "../../assets/blueLogo.svg"; 
 import mainLogoTransparent from "../../assets/mainLogoTransparent.svg";
+import { HERO_HEADING_DURATION, HERO_HEADING_FINAL_OPACITY, HERO_HEADING_FINAL_SCALE, HERO_HEADING_INITIAL_OPACITY, HERO_HEADING_INITIAL_SCALE } from "../../constants/animation";
 
-export const HERO_HEADING_DURATION = 1;
-const HERO_HEADING_INITIAL_SCALE = 0.9;
-const HERO_HEADING_FINAL_SCALE = 1;
-export const HERO_HEADING_INITIAL_OPACITY = 0;
-export const HERO_HEADING_FINAL_OPACITY = 1;
+// export const HERO_HEADING_DURATION = 1;
+// const HERO_HEADING_INITIAL_SCALE = 0.9;
+// const HERO_HEADING_FINAL_SCALE = 1;
+// export const HERO_HEADING_INITIAL_OPACITY = 0;
+// export const HERO_HEADING_FINAL_OPACITY = 1;
 
 export default function HeroSection() {
 

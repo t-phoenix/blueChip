@@ -13,7 +13,7 @@ export default function Portfolio() {
     {
       key:0,
       tokenName: "Bitcoin",
-      tokenSymbol: "btc",
+      tokenSymbol: "BTC",
       balance: 4.5,
       price: 500,
       value: 2250,
@@ -21,7 +21,7 @@ export default function Portfolio() {
     {
       key:1,
       tokenName: "Ethereum",
-      tokenSymbol: "eth",
+      tokenSymbol: "ETH",
       balance: 18,
       price: 200,
       value: 3600,
